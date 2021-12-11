@@ -9,7 +9,7 @@ class MarkService extends ChangeNotifier{
   final List<Mark> marks = [];
   late Mark selectMark;
 
-  final storage = FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
 
   bool isloading = true;
   bool isSaving = false;
@@ -35,11 +35,11 @@ class MarkService extends ChangeNotifier{
 
     final List<dynamic> categoriMap = json.decode(resp.body);
 
-    categoriMap.forEach((value) {
+    for (var value in categoriMap) {
       final response = Mark.fromMap(value);
       //resCategori.idcategory = key;
       marks.add(response);
-    });
+    }
 
     isloading = false;
     notifyListeners();
@@ -94,19 +94,18 @@ class MarkService extends ChangeNotifier{
       'Authorization' : 'Bearer $token'
     };
     
-    final resp = await http.put(url, headers: requestHeaders, body: jsonEncode(mark.toJson()),);
+    await http.put(url, headers: requestHeaders, body: jsonEncode(mark.toJson()),);
 
     final index = marks.indexWhere((element) => element.idTrademark == mark.idTrademark);
     marks[index] = mark;
 
-    //print(resp.body);
     notifyListeners();
     return mark.idTrademark;
 
   }
 
   Future<String> deleteMark(String idTrademark) async {
-    final url = Uri.parse('https://10.0.2.2:5001/api/Trademarks/${idTrademark}');
+    final url = Uri.parse('https://10.0.2.2:5001/api/Trademarks/$idTrademark');
     final token = await storage.read(key: 'token');
 
     Map<String, String> requestHeaders = {
@@ -115,7 +114,7 @@ class MarkService extends ChangeNotifier{
       'Authorization' : 'Bearer $token'
     };
 
-    final resp = await http.delete(url, headers: requestHeaders);
+    await http.delete(url, headers: requestHeaders);
     notifyListeners();
     marks.clear();
     getMark();

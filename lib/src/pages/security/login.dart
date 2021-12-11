@@ -33,7 +33,7 @@ class LoginScreen extends StatelessWidget {
 
                     ChangeNotifierProvider(
                       create: (_) => LoginFormProvider(),
-                      child: _LoginForm(),
+                      child: const _LoginForm(),
                     ),
                    // _LoginForm(),
                   ],
@@ -46,7 +46,7 @@ class LoginScreen extends StatelessWidget {
                 onPressed: () => Navigator.pushReplacementNamed(context, 'register'),
                 style: ButtonStyle(
                   overlayColor: MaterialStateProperty.all(Colors.indigo.withOpacity(0.1)),
-                  shape: MaterialStateProperty.all(StadiumBorder()),
+                  shape: MaterialStateProperty.all(const StadiumBorder()),
                 ),
                  child: const  Text('Regístrate', style: TextStyle(fontSize: 18, color: Colors.white),),
               ),
@@ -68,94 +68,92 @@ class _LoginForm extends StatelessWidget {
 
     final loginForm = Provider.of<LoginFormProvider>(context);
 
-    return Container(
-        child: Form(
+    return Form(
     
-          key: loginForm.formKey,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
+      key: loginForm.formKey,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
     
-          child: Column(
-            children: [
-              TextFormField(
-                autocorrect: false,
-                //initialValue: "alvarezarlei222@gmail.com",
-                keyboardType: TextInputType.emailAddress,
-                decoration: GlobalInput.authInputDecoration(
-                  hintText: 'ejemplo@gmail.com',
-                  labelText: 'E-mail',
-                  prefixIcon: Icons.alternate_email_rounded,
-                ),
-                onChanged: (value) => loginForm.email = value,
-                validator:(value) {
+      child: Column(
+        children: [
+          TextFormField(
+            autocorrect: false,
+            //initialValue: "alvarezarlei222@gmail.com",
+            keyboardType: TextInputType.emailAddress,
+            decoration: GlobalInput.authInputDecoration(
+              hintText: 'ejemplo@gmail.com',
+              labelText: 'E-mail',
+              prefixIcon: Icons.alternate_email_rounded,
+            ),
+            onChanged: (value) => loginForm.email = value,
+            validator:(value) {
     
-                  String pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-                  RegExp regExp  = RegExp(pattern);
+              String pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+              RegExp regExp  = RegExp(pattern);
     
-                  return regExp.hasMatch(value ?? '')
-                    ? null
-                    : 'No es un correo valido';
-                }
+              return regExp.hasMatch(value ?? '')
+                ? null
+                : 'No es un correo valido';
+            }
+          ),
+    
+          const SizedBox(height: 30),
+    
+          TextFormField(
+            autocorrect: false,
+            obscureText: true,
+            //initialValue: 'Baronrojo222',
+            keyboardType: TextInputType.emailAddress,
+            decoration: GlobalInput.authInputDecoration(
+              hintText: '*******',
+              labelText: 'Password',
+              prefixIcon: Icons.lock_outline,
+            ),
+            onChanged: (value) => loginForm.password = value,
+            validator: (value){
+              return (value != null && value.length >= 6)
+                ? null
+                : 'Ingrese almenos 6 caracteres';
+            },
+          ),
+    
+          const SizedBox(height: 30),
+    
+          MaterialButton(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            disabledColor: Colors.grey,
+            elevation: 0,
+            color: Colors.deepPurple,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 15),
+              child: Text( loginForm.isLoading ? 'Cargando...' :'Ingresar', 
+                style: const TextStyle(color: Colors.white),
               ),
+            ),
+            onPressed: loginForm.isLoading ? null : () async {
     
-              const SizedBox(height: 30),
+               FocusScope.of(context).unfocus();
+              final authService = Provider.of<AuthService>(context, listen: false);
     
-              TextFormField(
-                autocorrect: false,
-                obscureText: true,
-                //initialValue: 'Baronrojo222',
-                keyboardType: TextInputType.emailAddress,
-                decoration: GlobalInput.authInputDecoration(
-                  hintText: '*******',
-                  labelText: 'Password',
-                  prefixIcon: Icons.lock_outline,
-                ),
-                onChanged: (value) => loginForm.password = value,
-                validator: (value){
-                  return (value != null && value.length >= 6)
-                    ? null
-                    : 'Ingrese almenos 6 caracteres';
-                },
-              ),
+              if( !loginForm.isValidForm() ) return;
     
-              const SizedBox(height: 30),
+              loginForm.isLoading = true;
     
-              MaterialButton(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                disabledColor: Colors.grey,
-                elevation: 0,
-                color: Colors.deepPurple,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 15),
-                  child: Text( loginForm.isLoading ? 'Cargando...' :'Ingresar', 
-                    style: const TextStyle(color: Colors.white),
-                  ),
-                ),
-                onPressed: loginForm.isLoading ? null : () async {
+              final String? errorMessage =  await authService.login(loginForm.email, loginForm.password);
     
-                   FocusScope.of(context).unfocus();
-                  final authService = Provider.of<AuthService>(context, listen: false);
+              if(errorMessage == null){
+                Navigator.pushReplacementNamed(context, 'menuLateral');
+              }else{
+                //print('error login: $errorMessage');
+                MessageService.showSnackbar(errorMessage);
+                loginForm.isLoading = false;
+              }
     
-                  if( !loginForm.isValidForm() ) return;
+            
+            }
+          ),
     
-                  loginForm.isLoading = true;
-    
-                  final String? errorMessage =  await authService.login(loginForm.email, loginForm.password);
-    
-                  if(errorMessage == null){
-                    Navigator.pushReplacementNamed(context, 'menuLateral');
-                  }else{
-                    print('error login: $errorMessage');
-                    MessageService.showSnackbar(errorMessage);
-                    loginForm.isLoading = false;
-                  }
-    
-                
-                }
-              ),
-    
-            ],
-          )
-        ),
-      );
+        ],
+      )
+    );
   }
 }

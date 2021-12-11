@@ -9,7 +9,7 @@ class ProductService extends ChangeNotifier{
   final List<ProductsModel> products = [];
   late ProductsModel selectProduct;
 
-  final storage = FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
 
   bool isloading = true;
   bool isSaving = false;
@@ -34,12 +34,12 @@ class ProductService extends ChangeNotifier{
       
     http.Response resp = await http.get(url, headers: requestHeaders);
 
-    final List<dynamic> ProductiMap = json.decode(resp.body);
+    final List<dynamic> productiMap = json.decode(resp.body);
 
-    ProductiMap.forEach((value) {
+    for (var value in productiMap) {
       final response = ProductsModel.fromMap(value);
       products.add(response);
-    });
+    }
 
     isloading = false;
     notifyListeners();
@@ -75,7 +75,7 @@ class ProductService extends ChangeNotifier{
     final resp = await http.post(url, headers: requestHeaders ,body: jsonEncode(product.toJson()));
     final respuesta = json.decode(resp.body);
     product.idProduct = respuesta['idProduct'];
-    print('respuesta product: $respuesta');
+    //print('respuesta product: $respuesta');
 
     products.clear();
     getProduct();
@@ -96,7 +96,7 @@ class ProductService extends ChangeNotifier{
       'Authorization' : 'Bearer $token'
     };
     
-    final resp = await http.put(url, headers: requestHeaders, body: jsonEncode(product.toJson()),);
+   await http.put(url, headers: requestHeaders, body: jsonEncode(product.toJson()),);
 
     final index = products.indexWhere((element) => element.idProduct == product.idProduct);
     products[index] = product;
@@ -108,7 +108,7 @@ class ProductService extends ChangeNotifier{
   }
 
   Future<String> deleteProduct(String idProduct) async {
-    final url = Uri.parse('https://10.0.2.2:5001/api/Products/${idProduct}');
+    final url = Uri.parse('https://10.0.2.2:5001/api/Products/$idProduct');
     final token = await storage.read(key: 'token');
 
     Map<String, String> requestHeaders = {
@@ -117,7 +117,7 @@ class ProductService extends ChangeNotifier{
       'Authorization' : 'Bearer $token'
     };
 
-    final resp = await http.delete(url, headers: requestHeaders);
+    await http.delete(url, headers: requestHeaders);
     notifyListeners();
     products.clear();
     getProduct();

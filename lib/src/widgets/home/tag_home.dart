@@ -79,15 +79,11 @@ class _DetailsHome extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                child: Icon(icon, color: color, size: 100,),
-              ),
+              Icon(icon, color: color, size: 100,),
 
-              Container(
-                child: Text(texto, style: const TextStyle(fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
+              Text(texto, style: const TextStyle(fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
               ),
 
               const SizedBox(height: 10,),
@@ -110,35 +106,3 @@ class _DetailsHome extends StatelessWidget {
   );
 }
 
-
-
-
-/* 
-return Padding(
-      padding: const EdgeInsets.only(right: 0),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-        width: double.infinity,
-        height: 200,
-        decoration: _buildBoxDecoration(),
-        child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                child: Icon(icon, color: color, size: 100,),
-              ),
-
-              Container(
-                child: Text(texto, style: const TextStyle(fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-              )
-              
-            ],
-          ),
-        ),
-      ),
-    );
- */

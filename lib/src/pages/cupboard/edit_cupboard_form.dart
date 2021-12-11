@@ -83,7 +83,7 @@ class _EditCupboardForm extends StatelessWidget {
                       }).toList(),
                       onChanged: (value) {
                         cupboardProviderDetail.idProduct = value.toString();
-                        print('valor del select $value');
+                        //print('valor del select $value');
                       },
                     ),
 
@@ -123,14 +123,16 @@ class _EditCupboardForm extends StatelessWidget {
                       dateLabelText: 'Date entry',
                       onChanged: (val) {
                         cupboardProviderDetail.entryDate = val;
-                        print(val);
+                        //print(val);
                       },
                       validator: (value) {
                         if(value == null || value.isEmpty){
                           return 'This fiel es required';
                         }
                       },
-                      onSaved: (val) => print("valor print $val"),
+                      onSaved: (val) {
+                        //print("valor print $val");
+                      },
                     ),
 
                     const SizedBox(height: 20,),
@@ -149,14 +151,16 @@ class _EditCupboardForm extends StatelessWidget {
                       ),
                       onChanged: (val) {
                         cupboardProviderDetail.exitDate = val;
-                        print(val);
+                        //(val);
                       },
                       validator: (value) {
                         if(value == null || value.isEmpty){
                           return 'This fiel es required';
                         }
                       },
-                      onSaved: (val) => print("valor print $val"),
+                      onSaved: (val) {
+                        //print("valor print $val");
+                      },
                     ),
 
                     const SizedBox(height: 20,),
@@ -175,14 +179,16 @@ class _EditCupboardForm extends StatelessWidget {
                       ),
                       onChanged: (val) {
                         cupboardProviderDetail.expirationDate = val;
-                        print(val);
+                        //print(val);
                       },
                       validator: (value) {
                         if(value == null || value.isEmpty){
                           return 'This fiel es required';
                         }
                       },
-                      onSaved: (val) => print("valor print $val"),
+                      onSaved: (val) {
+                        //print("valor print $val");
+                      },
                     ),
 
                     const SizedBox(height: 20,),
@@ -242,7 +248,7 @@ class _EditCupboardForm extends StatelessWidget {
     boxShadow: [
       BoxShadow(
         color: Colors.black.withOpacity(0.05),
-        offset: Offset(0,5),
+        offset: const Offset(0,5),
         blurRadius: 5
       )
     ]

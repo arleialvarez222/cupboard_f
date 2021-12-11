@@ -9,7 +9,7 @@ class CategoriService extends ChangeNotifier{
   final List<Categories> categories = [];
   late Categories selCategorie;
 
-  final storage = FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
 
   bool isloading = true;
   bool isSaving = false;
@@ -35,11 +35,11 @@ class CategoriService extends ChangeNotifier{
 
     final List<dynamic> categoriMap = json.decode(resp.body);
 
-    categoriMap.forEach((value) {
+    for (var value in categoriMap) {
       final resCategori = Categories.fromMap(value);
       //resCategori.idcategory = key;
       categories.add(resCategori);
-    });
+    }
 
     isloading = false;
     notifyListeners();
@@ -95,7 +95,7 @@ class CategoriService extends ChangeNotifier{
       'Authorization' : 'Bearer $token'
     };
     
-    final resp = await http.put(url, headers: requestHeaders, body: jsonEncode(category.toJson()),);
+    await http.put(url, headers: requestHeaders, body: jsonEncode(category.toJson()),);
     
 
     final index = categories.indexWhere((element) => element.idcategory == category.idcategory);
@@ -108,7 +108,7 @@ class CategoriService extends ChangeNotifier{
   }
 
   Future<String> deleteCategory(String idcategory) async {
-    final url = Uri.parse('https://10.0.2.2:5001/api/Categories/${idcategory}');
+    final url = Uri.parse('https://10.0.2.2:5001/api/Categories/$idcategory');
     final token = await storage.read(key: 'token');
 
     Map<String, String> requestHeaders = {
@@ -117,7 +117,7 @@ class CategoriService extends ChangeNotifier{
       'Authorization' : 'Bearer $token'
     };
 
-    final resp = await http.delete(url, headers: requestHeaders);
+    await http.delete(url, headers: requestHeaders);
     
     notifyListeners();
     categories.clear();

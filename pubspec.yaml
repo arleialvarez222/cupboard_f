@@ -41,7 +41,6 @@ dependencies:
   flutter_secure_storage: ^4.2.1
   http: ^0.13.4
   multi_select_flutter: ^4.0.0
-  select_form_field: "^2.2.0"
   date_time_picker: ^2.1.0
   jiffy: ^4.1.0
 

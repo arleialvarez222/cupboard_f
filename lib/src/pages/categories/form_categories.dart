@@ -138,7 +138,7 @@ BoxDecoration _buildDecoration() => BoxDecoration(
   boxShadow: [
     BoxShadow(
       color: Colors.black.withOpacity(0.08),
-      offset: Offset(0,5),
+      offset: const Offset(0,5),
       blurRadius: 5
     )
   ]

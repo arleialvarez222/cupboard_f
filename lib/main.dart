@@ -70,7 +70,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Material App',
       debugShowCheckedModeBanner: false,
-      initialRoute: 'menuLateral',
+      initialRoute: 'login',
       routes: {
         'login' : (_) => const LoginScreen(),
         'register' : (_) => const RegisterScreen(),
@@ -90,7 +90,7 @@ class MyApp extends StatelessWidget {
       },
 
       theme: ThemeData.light().copyWith(
-        scaffoldBackgroundColor: Colors.grey[300],
+        scaffoldBackgroundColor: Colors.grey.shade200,
         appBarTheme: const AppBarTheme(
           elevation: 0,
           color: Colors.blue

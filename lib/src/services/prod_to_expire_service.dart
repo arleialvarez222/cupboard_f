@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 class ProductToExpireService extends ChangeNotifier{
 
   final List<ProdExpireModel> productToExpire = [];
-  final storage = FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
   bool isloading = true;
 
   ProductToExpireService(){
@@ -29,10 +29,10 @@ class ProductToExpireService extends ChangeNotifier{
 
     final List<dynamic> productToExpMap = json.decode(resp.body);
 
-    productToExpMap.forEach((value) {
+    for (var value in productToExpMap) {
       final response = ProdExpireModel.fromMap(value);
       productToExpire.add(response);
-    });
+    }
 
     //print(productToExpire);
     isloading = false;

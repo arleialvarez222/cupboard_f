@@ -27,7 +27,7 @@ class ToExpireCard extends StatelessWidget {
           alignment: Alignment.bottomLeft, 
           children: [
         
-             _DetailCupboard(nombre: toExpire.product.nameProduct, fecha: Jiffy(toExpire.expirationDate).format("dd, MMM yyyy"), height: height,),
+             _DetailCupboard(nombre: toExpire.product.nameProduct, fecha: Jiffy(toExpire.expirationDate).format("dd MMM yyyy"), height: height,),
 
           ],
         ),
@@ -51,14 +51,12 @@ class ToExpireCard extends StatelessWidget {
 class _DetailCupboard extends StatelessWidget {
 
   final String nombre;
- //final String marca;
  final String fecha;
  final double height;
 
   const _DetailCupboard({
     Key? key, 
-    required this.nombre, 
-    //required this.marca, 
+    required this.nombre,  
     required this.fecha,
     required this.height,
   }) : super(key: key);
@@ -75,21 +73,16 @@ class _DetailCupboard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(nombre, style: const TextStyle(fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
+            Text('Name:', style: TextStyle(fontSize: 15, color: Colors.black.withOpacity(0.6),)),
+            const SizedBox(height: 5,),
+            Text(nombre, style: const TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
-
-            const SizedBox(height: 8,),
-
-            /* Text(marca, style: TextStyle(fontSize: 17, color: Colors.black.withOpacity(0.6),),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ), */
-
-            const SizedBox(height: 8,),
-
-            Text(fecha.toString(), style: TextStyle(fontSize: 17, color: Colors.black.withOpacity(0.6),)),
+            const SizedBox(height: 10,),
+            Text('Expire Date:', style: TextStyle(fontSize: 15, color: Colors.black.withOpacity(0.6),)),
+            const SizedBox(height: 5,),
+            Text(fecha.toString(), style: const TextStyle(fontSize: 17, color: Colors.black, fontWeight: FontWeight.bold)),
           ],
         ),
       ),

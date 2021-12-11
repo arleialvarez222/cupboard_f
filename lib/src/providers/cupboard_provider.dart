@@ -14,9 +14,9 @@ class CupboardProvider extends ChangeNotifier{
   );
 
   updateIsDefault(bool value){
-    print(value);
+    
 
-    this.cupModel.isDefault = value;
+    cupModel.isDefault = value;
     notifyListeners();
   }
 

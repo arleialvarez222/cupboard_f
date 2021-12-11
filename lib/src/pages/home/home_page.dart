@@ -1,7 +1,6 @@
-
-import 'package:cupboard_flutter/src/services/cupboard_service.dart';
 import 'package:cupboard_flutter/src/services/prod_to_expire_service.dart';
 import 'package:cupboard_flutter/src/services/product_expired_service.dart';
+import 'package:cupboard_flutter/src/services/req_cupboard_service.dart';
 import 'package:cupboard_flutter/src/widgets/home/tag_home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -16,7 +15,7 @@ class HomePage extends StatelessWidget {
 
     final producToExpire = Provider.of<ProductToExpireService>(context);
     final expiredProducts = Provider.of<ExpiredProdutService>(context);
-    final cupboardLists = Provider.of<CupboardService>(context);
+    final cupboardLists = Provider.of<ReqCupboadService>(context);
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -70,7 +69,7 @@ class HomePage extends StatelessWidget {
       
               Tag(
                 icon: Icons.check_circle_outline, color: Colors.green, 
-                texto: "${cupboardLists.cupboardList.length} productos estan disponibles",
+                texto: "${cupboardLists.cupboardLista.length} productos estan disponibles",
                 button: MaterialButton(
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   disabledColor: Colors.blue,

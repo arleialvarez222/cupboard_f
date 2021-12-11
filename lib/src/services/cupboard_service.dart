@@ -30,10 +30,10 @@ class CupboardService extends ChangeNotifier{
 
     final List<dynamic> cupboardMap = json.decode(resp.body);
 
-    cupboardMap.forEach((value) {
+    for (var value in cupboardMap) {
       final response = CupboardModel.fromMap(value);
       cupboardList.add(response);
-    });
+    }
 
     isloading = false;
     notifyListeners();

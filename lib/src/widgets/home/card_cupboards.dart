@@ -5,7 +5,7 @@ import 'package:jiffy/jiffy.dart';
 
 class ListCupboardCard extends StatelessWidget {
 
- final CupboardModel cupboard;
+ final CupboardAvailable cupboard;
  final double height;
 
   const ListCupboardCard({
@@ -27,7 +27,7 @@ class ListCupboardCard extends StatelessWidget {
           alignment: Alignment.bottomLeft, 
           children: [
         
-             _DetailCupboard(nombre: cupboard.product!.nameProduct, fecha: Jiffy(cupboard.expirationDate).format("dd MMM yyyy"), height: height,),
+             _DetailCupboard(nombre: cupboard.productAvailable!.nameProduct, fecha: Jiffy(cupboard.expirationDate).format("dd MMM yyyy"), height: height,),
 
           ],
         ),
@@ -73,23 +73,19 @@ class _DetailCupboard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(nombre, style: const TextStyle(fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
+
+            Text('Name:', style: TextStyle(fontSize: 15, color: Colors.black.withOpacity(0.6),)),
+            const SizedBox(height: 5,),
+            Text(nombre, style: const TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
 
-            const SizedBox(height: 8,),
+            const SizedBox(height: 10,),
 
-            /* Text(marca, style: TextStyle(fontSize: 17, color: Colors.black.withOpacity(0.6),),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ), */
-
-            const SizedBox(height: 8,),
-
-            //Container(child: fecha.toLocal(),),
-
-            Text(fecha, style: TextStyle(fontSize: 17, color: Colors.black.withOpacity(0.6),)),
+            Text('Expire Date:', style: TextStyle(fontSize: 15, color: Colors.black.withOpacity(0.6),)),
+            const SizedBox(height: 5,),
+            Text(fecha, style: const TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold), overflow: TextOverflow.ellipsis),
           ],
         ),
       ),

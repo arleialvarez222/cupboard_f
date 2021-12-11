@@ -20,12 +20,13 @@ class ToExpirePage extends StatelessWidget {
         title: const Text('Product to expire'),
         centerTitle: true,
       ),
-      body: ListView.builder(
-        itemCount: toExpireService.productToExpire.length,
-        itemBuilder: (BuildContext context, int index){
-          return ToExpireCard(toExpire: toExpireService.productToExpire[index], height: 100);
-          }
-      ), 
+      body: toExpireService.productToExpire.isNotEmpty ?
+        ListView.builder(
+          itemCount: toExpireService.productToExpire.length,
+          itemBuilder: (BuildContext context, int index){
+            return ToExpireCard(toExpire: toExpireService.productToExpire[index], height: 138);
+            }
+        ) : const Center(child: Text('No hay productos para mostrar', style: TextStyle(fontSize: 20),),)
      
     );
   }

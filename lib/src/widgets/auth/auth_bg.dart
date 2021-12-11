@@ -11,7 +11,7 @@ class AuthBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       height: double.infinity,
       child: Stack(
@@ -65,7 +65,7 @@ class _PurpleBox extends StatelessWidget {
     );
   }
 
-  BoxDecoration _purpleBackground() =>  BoxDecoration(
+  BoxDecoration _purpleBackground() =>  const BoxDecoration(
     //color: Colors.indigo,
     gradient: LinearGradient(
       colors: [

@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 class ExpiredProdutService extends ChangeNotifier{
 
   final List<ExpiredProdModel> expiredProduct = [];
-  final storage = FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
   bool isloading = true;
 
   ExpiredProdutService(){
@@ -29,10 +29,10 @@ class ExpiredProdutService extends ChangeNotifier{
 
     final List<dynamic> productToExpMap = json.decode(resp.body);
 
-    productToExpMap.forEach((value) {
+    for (var value in productToExpMap) {
       final response = ExpiredProdModel.fromMap(value);
       expiredProduct.add(response);
-    });
+    }
 
     //print(productToExpire);
     isloading = false;

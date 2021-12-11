@@ -1,38 +1,6 @@
 
 import 'dart:convert';
 
-/* class CupboardReqModel {
-  CupboardReqModel({
-    required this.nameCupBoard,
-    required this.isDefault,
-    required this.creationDate,
-    required this.cupBoardDetails,
-  });
-
-  String nameCupBoard;
-  bool isDefault;
-  DateTime creationDate;
-  List<CupBoardDetail> cupBoardDetails;
-
-  factory CupboardReqModel.fromJson(String str) => CupboardReqModel.fromMap(json.decode(str));
-
-  //String toJson() => json.encode(toMap());
-
-  factory CupboardReqModel.fromMap(Map<String, dynamic> json) => CupboardReqModel(
-    nameCupBoard: json["nameCupBoard"],
-    isDefault: json["isDefault"],
-    creationDate: DateTime.parse(json["creationDate"]),
-    cupBoardDetails: List<CupBoardDetail>.from(json["cupBoardDetails"].map((x) => CupBoardDetail.fromMap(x))),
-  );
-
-  Map<String, dynamic> toJson() => {
-    "nameCupBoard": nameCupBoard,
-    "isDefault": isDefault,
-    "creationDate": creationDate.toIso8601String(),
-    "cupBoardDetails": List<dynamic>.from(cupBoardDetails.map((x) => x.toJson())),
-  };
-} */
-
 class CupBoardReq {
   CupBoardReq({
     this.idCupBoard,
@@ -49,8 +17,6 @@ class CupBoardReq {
   List<CupBoardDetail>? cupBoardDetails;
 
   factory CupBoardReq.fromJson(String str) => CupBoardReq.fromMap(json.decode(str));
-
-  //String toJson() => json.encode(toMap());
 
   factory CupBoardReq.fromMap(Map<String, dynamic> json) => CupBoardReq(
     idCupBoard: json["idCupBoard"],
@@ -78,7 +44,6 @@ class CupBoardDetail {
     required this.entryDate,
     required this.exitDate,
     required this.expirationDate,
-    //this.cupBoard,
   });
 
   String? idCupboardDetail;
@@ -88,11 +53,8 @@ class CupBoardDetail {
   String entryDate;
   String exitDate;
   String expirationDate;
- //CupBoardReq? cupBoard;
 
   factory CupBoardDetail.fromJson(String str) => CupBoardDetail.fromMap(json.decode(str));
-
-  //String toJson() => json.encode(toMap());
 
   factory CupBoardDetail.fromMap(Map<String, dynamic> json) => CupBoardDetail(
     idCupboardDetail: json["idCupboardDetail"],
@@ -102,10 +64,6 @@ class CupBoardDetail {
     entryDate: json["entryDate"],
     exitDate: json["exitDate"],
     expirationDate: json["expirationDate"],
-    //entryDate: DateTime.parse(json["entryDate"]),
-    //exitDate: DateTime.parse(json["exitDate"]),
-    //expirationDate: DateTime.parse(json["expirationDate"]),
-    //cupBoard: CupBoardReq.fromMap(json["cupBoard"]),
   );
 
   Map<String, dynamic> toJson() => {
@@ -116,9 +74,5 @@ class CupBoardDetail {
     "entryDate": entryDate,
     "exitDate": exitDate,
     "expirationDate": expirationDate,
-    //"exitDate": exitDate.toIso8601String(),
-    //"entryDate": entryDate.toIso8601String(),
-    //"expirationDate": expirationDate.toIso8601String(),
-    //"cupBoard": cupBoard!.toJson(),
   };
 }

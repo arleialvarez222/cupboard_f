@@ -1,6 +1,3 @@
-// To parse this JSON data, do
-//
-//     final categoriesResponse = categoriesResponseFromMap(jsonString);
 
 import 'dart:convert';
 
@@ -14,8 +11,6 @@ class Mark {
   String mark;
 
   factory Mark.fromJson(String str) => Mark.fromMap(json.decode(str));
-
-  //String toJson() => json.encode(toMap());
 
   factory Mark.fromMap(Map<String, dynamic> json) => Mark(
       idTrademark: json["idTrademark"],

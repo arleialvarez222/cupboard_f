@@ -1,6 +1,3 @@
-// To parse this JSON data, do
-//
-//     final productsModel = productsModelFromMap(jsonString);
 
 import 'dart:convert';
 
@@ -21,7 +18,6 @@ class ProductsModel {
 
     factory ProductsModel.fromJson(String str) => ProductsModel.fromMap(json.decode(str));
 
-    //String toJson() => json.encode(toMap());
 
     factory ProductsModel.fromMap(Map<String, dynamic> json) => ProductsModel(
         idProduct: json["idProduct"],
@@ -32,11 +28,9 @@ class ProductsModel {
     );
 
     Map<String, dynamic> toJson() => {
-        //"idProduct": idProduct,
         "idMark": idMark,
         "nameProduct": nameProduct,
         "barCode": barCode,
-        //"trademark": trademark!.toMap(),
     };
 }
 

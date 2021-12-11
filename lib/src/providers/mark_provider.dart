@@ -9,13 +9,6 @@ class MarkProvider extends ChangeNotifier {
 
   MarkProvider(this.mark);
 
-  /* categoriU( value){
-    print(value);
-
-    this.categoria = value;
-    notifyListeners();
-  } */
-
   bool isValidForm(){
     return formKey.currentState?.validate() ?? false;
   } 

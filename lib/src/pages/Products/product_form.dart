@@ -1,4 +1,3 @@
-
 import 'package:cupboard_flutter/src/models/mark_model.dart';
 import 'package:cupboard_flutter/src/providers/product_provider.dart';
 import 'package:cupboard_flutter/src/services/mark_service.dart';
@@ -34,11 +33,8 @@ class _FormProduct extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final markService = Provider.of<MarkService>(context);
-    //List valores = [];
     final productPro = Provider.of<ProductProvider>(context);
     final productProvider = productPro.product;
-
-    //String _value = productProvider.idMark;
 
     return Scaffold(
       appBar: AppBar(
@@ -93,12 +89,7 @@ class _FormProduct extends StatelessWidget {
                         color: Colors.indigo,
                       ),
                       hint: const Text('Select Mark'),
-                      //value: _value,
-                      selectedItemBuilder: (BuildContext context) {
-                        return markService.marks.map<Widget>((Mark item) {
-                        return Text('item ${item.mark}');
-                        }).toList();
-                      },
+                      //value: dropdowValue,
                       items: markService.marks.map<DropdownMenuItem<String>>((Mark value) {
                         return DropdownMenuItem<String>(
                           value: value.idTrademark,
@@ -107,7 +98,7 @@ class _FormProduct extends StatelessWidget {
                       }).toList(),
                       onChanged: (value) {
                         productProvider.idMark = value.toString();
-                        print('valor del select $value');
+                        //print('valor del select $value');
                       },
                     ),
 

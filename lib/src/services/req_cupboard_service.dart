@@ -7,23 +7,55 @@ import 'package:http/http.dart' as http;
 
 class ReqCupboadService extends ChangeNotifier{
 
-  final List<CupBoardReq> cupboardDetail = [];
+  //final List<CupBoardReq> cupboardDetail = [];
   late CupBoardReq selectCupboardDetail;
-  final List<CupBoardDetail> cupboardDet = [];
+  //final List<CupBoardDetail> cupboardDet = [];
   late CupBoardDetail selectCupboardDet;
 
 
   final List<CupboardModel> cupboardList = [];
   late CupboardModel selectCupboard;
+  final List<CupboardAvailable> cupboardLista = [];
+  late CupboardAvailable selectCupboardd;
   final storage = const FlutterSecureStorage();
   bool isSaving = false;
   bool isloading = true;
+  final fech = DateTime.now();
 
   ReqCupboadService(){
     getCupboard();
+    getAllCupboard();
   }
 
-  Future<List<CupboardModel>> getCupboard()async{
+  Future<List<CupboardAvailable>> getCupboard()async{
+    notifyListeners();
+
+    final url = Uri.parse('https://10.0.2.2:5001/api/CupboardDetails/valid-products');
+    final token = await storage.read(key: 'token');
+      
+    Map<String, String> requestHeaders = {
+    'Content-type': 'application/json',
+    'Accept': 'application/json',
+    'Authorization' : 'Bearer $token'
+    };
+    http.Response resp = await http.get(url, headers: requestHeaders);
+
+    final List<dynamic> cupboardMap = json.decode(resp.body);
+
+    for (var value in cupboardMap) {
+      final response = CupboardAvailable.fromMap(value);
+
+      cupboardLista.add(response);
+    }
+
+    isloading = false;
+    notifyListeners();
+
+    return cupboardLista;
+
+  }
+
+  Future<List<CupboardModel>> getAllCupboard()async{
     notifyListeners();
 
     final url = Uri.parse('https://10.0.2.2:5001/api/CupboardDetails');
@@ -38,11 +70,12 @@ class ReqCupboadService extends ChangeNotifier{
 
     final List<dynamic> cupboardMap = json.decode(resp.body);
 
-    cupboardMap.forEach((value) {
+    for (var value in cupboardMap) {
       final response = CupboardModel.fromMap(value);
+
+      //if(response.expirationDate   fech)
       cupboardList.add(response);
-      //cupboardDetail.add(response);
-    });
+    }
 
     isloading = false;
     notifyListeners();
@@ -85,12 +118,9 @@ class ReqCupboadService extends ChangeNotifier{
     final data = json.decode(resp.body);
     cupboardReq.idCupBoard = data['idCupBoard'];
 
-    //cupboardDetail.add(cupboardModel);
-    //print(data);
-
     notifyListeners();
     cupboardList.clear();
-    getCupboard();
+    getAllCupboard();
     return cupboardReq.idCupBoard;
 
   }
@@ -99,34 +129,24 @@ class ReqCupboadService extends ChangeNotifier{
     final url = Uri.parse('https://10.0.2.2:5001/api/CupboardDetails/${cupBoardDetail.idCupboardDetail}');
     final token = await storage.read(key: 'token');
 
-    /* final Map<String, dynamic> cupboardData = {
-      'nameCupBoard': cupboardReq.nameCupBoard,
-      'isDefault': cupboardReq.isDefault,
-      'creationDate': cupboardReq.creationDate,
-      'cupBoardDetails': [cupBoardDetail],
-    };  */
-
     Map<String, String> requesHeaders = {
       'Content-type': 'application/json',
       'Accept': 'application/json',
       'Authorization' : 'Bearer $token',
     };
-    final resp = await http.put(url, headers: requesHeaders, body: jsonEncode(cupBoardDetail.toJson()));
+    await http.put(url, headers: requesHeaders, body: jsonEncode(cupBoardDetail.toJson()));
     final index = cupboardList.indexWhere((element) => element.idCupboardDetail == cupBoardDetail.idCupboardDetail);
     cupboardList[index] = cupBoardDetail;
 
-    //cupboardDetail.add(cupboardModel);
-    //print(data);
-
     notifyListeners();
     cupboardList.clear();
-    getCupboard();
+    getAllCupboard();
     return cupBoardDetail.idCupboardDetail;
 
   }
 
   Future<String> deleteCupboard(String idCupboard) async {
-    final url = Uri.parse('https://10.0.2.2:5001/api/CupBoard/${idCupboard}');
+    final url = Uri.parse('https://10.0.2.2:5001/api/CupBoard/$idCupboard');
     final token = await storage.read(key: 'token');
 
     Map<String, String> requestHeaders = {
@@ -135,10 +155,10 @@ class ReqCupboadService extends ChangeNotifier{
       'Authorization' : 'Bearer $token'
     };
 
-    final resp = await http.delete(url, headers: requestHeaders);
+    await http.delete(url, headers: requestHeaders);
     notifyListeners();
     cupboardList.clear();
-    getCupboard();
+    getAllCupboard();
     return idCupboard;
   }
 
