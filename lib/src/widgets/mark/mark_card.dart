@@ -23,7 +23,7 @@ class MarkCard extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.only(top: 30, bottom: 0),
         width: double.infinity,
-        height: 70,
+        height: 90,
         decoration: _cardBorders(),
         child: Stack(
           alignment: Alignment.bottomLeft, 
@@ -115,12 +115,14 @@ class _DetailsMark extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         width: double.infinity,
-        height: 70,
+        height: 90,
         decoration: _buildBoxDecoration(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(nameMark, style: const TextStyle(fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
+            Text('Name:', style: TextStyle(fontSize: 15, color: Colors.black.withOpacity(0.6),)),
+            const SizedBox(height: 5,),
+            Text(nameMark, style: const TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),

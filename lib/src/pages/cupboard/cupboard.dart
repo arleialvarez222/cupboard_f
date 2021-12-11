@@ -13,7 +13,6 @@ class CupboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final cupboardService = Provider.of<CupboardService>(context);
     final reqCupboardService = Provider.of<ReqCupboadService>(context);
     if(reqCupboardService.isloading)return const Loading();
 
@@ -21,7 +20,7 @@ class CupboardPage extends StatelessWidget {
       body: ListView.builder(
         itemCount: reqCupboardService.cupboardList.length,
         itemBuilder: (BuildContext context, int index) {
-          return CupboardCard(cupboard: reqCupboardService.cupboardList[index], height: 120);
+          return CupboardCard(cupboard: reqCupboardService.cupboardList[index], height: 200);
         },
       ),
     

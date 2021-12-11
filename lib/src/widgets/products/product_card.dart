@@ -3,18 +3,15 @@ import 'package:cupboard_flutter/src/models/product_model.dart';
 import 'package:cupboard_flutter/src/services/products_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-//import 'package:handling_cupboard/src/models/categories_model.dart';
 
 class ProductCard extends StatelessWidget {
 
   final ProductsModel productM;
-  //final Trademark tradeMark;/
   final dynamic marca;
 
   const ProductCard({
     Key? key, 
     required this.productM,
-    //required this.tradeMark,
     this.marca, 
   }) : super(key: key);
 
@@ -29,7 +26,7 @@ class ProductCard extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.only(top: 30, bottom: 0),
         width: double.infinity,
-        height: 110,
+        height: 138,
         decoration: _cardBorders(),
         child: Stack(
           alignment: Alignment.bottomLeft, 
@@ -108,13 +105,11 @@ class ProductCard extends StatelessWidget {
 class _DetailsProduct extends StatelessWidget {
 
   final dynamic nombre;
-  //final String code;
   final dynamic marca;
 
   const _DetailsProduct( {
     Key? key, 
-    required this.nombre, 
-    //required this.code, 
+    required this.nombre,  
     this.marca
   }) : super(key: key);
 
@@ -123,21 +118,24 @@ class _DetailsProduct extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(right: 0),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         width: double.infinity,
-        height: 110,
+        height: 138,
         decoration: _buildBoxDecoration(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(nombre, style: const TextStyle(fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
+
+            Text('Name:', style: TextStyle(fontSize: 15, color: Colors.black.withOpacity(0.6),)),
+            const SizedBox(height: 5,),
+            Text(nombre, style: const TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
-
             const SizedBox(height: 10,),
-
-            Text(marca, style: TextStyle(fontSize: 17, color: Colors.black.withOpacity(0.7),),
+            Text('Mark:', style: TextStyle(fontSize: 15, color: Colors.black.withOpacity(0.6),)),
+            const SizedBox(height: 5,),
+            Text(marca, style: const TextStyle(fontSize: 17, color: Colors.black, fontWeight: FontWeight.bold),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),

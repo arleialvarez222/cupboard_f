@@ -21,7 +21,7 @@ class CategoriesPage extends StatelessWidget {
       body: ListView.builder(
         itemCount: categoriService.categories.length,
         itemBuilder: (BuildContext context, int index){
-          return CategoryCard(category: categoriService.categories[index], height: 70);
+          return CategoryCard(category: categoriService.categories[index], height: 90);
           }
       ), 
 

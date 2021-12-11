@@ -26,6 +26,7 @@ class HomePage extends StatelessWidget {
             spacing: 10.0,
             children: <Widget>[
               Tag(
+                
                 icon: Icons.warning_amber_outlined, color: Colors.yellow, 
                 texto: producToExpire.productToExpire.length == 1 ? "${producToExpire.productToExpire.length} producto esta por expirar" : "${producToExpire.productToExpire.length} productos estan por expirar",
                 button: MaterialButton(
