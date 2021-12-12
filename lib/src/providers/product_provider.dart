@@ -8,11 +8,12 @@ class ProductProvider extends ChangeNotifier {
 
   ProductProvider(this.product);
 
+  valueSelect(String value){
+    product.idMark = value;
+    notifyListeners();
+  }
+
   bool isValidForm(){
-    //print('nombre: ${product.nameProduct}');
-    //print('code: ${product.barCode}');
-    //print('id mark: ${product.idMark}');
-   // print('id mark: ${product.trademark}');
     return formKey.currentState?.validate() ?? false;
   } 
 }

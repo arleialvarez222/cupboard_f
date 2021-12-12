@@ -29,6 +29,8 @@ class AuthService extends ChangeNotifier {
     await http.post(url, headers: requestHeaders, body: jsonEncode(authData));
     //final Map<String, dynamic> decodeResp = json.decode(resp.body);
     //print(resp.body);
+
+    notifyListeners();
   } 
 
   Future<String?> login(String email, String password) async {
@@ -55,9 +57,10 @@ class AuthService extends ChangeNotifier {
       await storage.write(key: 'token', value: decodeResp['token']);
       return null;
     }else{
-
+      
       //print('respuesta loginService error: $decodeResp');
       return decodeResp['ERROR'];
+  
     } 
 
   } 

@@ -32,7 +32,7 @@ class CupboardPage extends StatelessWidget {
             isDefault: true,
           );
           reqCupboardService.selectCupboardDet = CupBoardDetail(
-            idProduct: "",
+            idProduct: reqCupboardService.cupboardList.first.idProduct,
             amount: "",
             entryDate: "",
             exitDate: "",

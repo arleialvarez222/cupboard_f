@@ -98,28 +98,19 @@ class _CupboardForm extends StatelessWidget {
                         color: Colors.indigo,
                       ),
                       hint: const Text('Select Product'),
-                      //value: _value,
-                      selectedItemBuilder: (BuildContext context) {
-                        return productService.products.map<Widget>((ProductsModel item) {
-                        return Text('item ${item.nameProduct}');
-                        }).toList();
-                      },
+                      value: cupboardProviderDetail.idProduct,
                       items: productService.products.map<DropdownMenuItem<String>>((ProductsModel value) {
                         return DropdownMenuItem<String>(
                           value: value.idProduct,
                           child: Text(value.nameProduct),
                         );
                       }).toList(),
-                      onChanged: (value) {
-                        cupboardProviderDetail.idProduct = value.toString();
-                        //print('valor del select $value');
-                      },
+                      onChanged: (value) => cupboardPro.valueSelect(value.toString())
                     ),
 
                     const SizedBox(height: 20,),
 
                     TextFormField(
-                      //keyboardType: TextInputType.number,
                       initialValue: cupboardProviderDetail.amount.toString(),
                       onChanged: (value) {
                         cupboardProviderDetail.amount = value;

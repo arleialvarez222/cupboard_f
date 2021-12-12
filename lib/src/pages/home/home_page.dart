@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
- //final color = const TextStyle(color: Colors.white);
 
   const HomePage({Key? key}) : super(key: key);
 
@@ -23,10 +22,9 @@ class HomePage extends StatelessWidget {
           child: Wrap(
             alignment: WrapAlignment.center,
             direction: Axis.horizontal,
-            spacing: 10.0,
+            spacing: 0.0,
             children: <Widget>[
               Tag(
-                
                 icon: Icons.warning_amber_outlined, color: Colors.yellow, 
                 texto: producToExpire.productToExpire.length == 1 ? "${producToExpire.productToExpire.length} producto esta por expirar" : "${producToExpire.productToExpire.length} productos estan por expirar",
                 button: MaterialButton(

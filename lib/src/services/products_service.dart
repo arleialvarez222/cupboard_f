@@ -77,8 +77,7 @@ class ProductService extends ChangeNotifier{
     product.idProduct = respuesta['idProduct'];
     //print('respuesta product: $respuesta');
 
-    products.clear();
-    getProduct();
+    products.add(product);
 
     notifyListeners();
     return product.idProduct;
@@ -101,7 +100,8 @@ class ProductService extends ChangeNotifier{
     final index = products.indexWhere((element) => element.idProduct == product.idProduct);
     products[index] = product;
 
-    //print(resp.body);
+    products.clear();
+    getProduct();
     notifyListeners();
     return product.idProduct;
 

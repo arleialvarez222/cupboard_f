@@ -14,9 +14,12 @@ class CupboardProvider extends ChangeNotifier{
   );
 
   updateIsDefault(bool value){
-    
-
     cupModel.isDefault = value;
+    notifyListeners();
+  }
+
+  valueSelect(String value){
+    cupDetail.idProduct = value;
     notifyListeners();
   }
 

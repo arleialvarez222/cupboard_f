@@ -48,9 +48,9 @@ class _EditCupboardForm extends StatelessWidget {
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.only(top: 0, left: 10, right: 10),
+            padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
             child: Container(
-              padding: const EdgeInsets.only(right: 15, left: 15, bottom: 15),
+              padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
               width: double.infinity,
               //height: double.infinity,
               decoration: _buildBoxDecoration(),
@@ -69,22 +69,14 @@ class _EditCupboardForm extends StatelessWidget {
                         color: Colors.indigo,
                       ),
                       hint: const Text('Select Product'),
-                      //value: _value,
-                      selectedItemBuilder: (BuildContext context) {
-                        return productService.products.map<Widget>((ProductsModel item) {
-                        return Text('item ${item.nameProduct}');
-                        }).toList();
-                      },
+                      value: cupboardProviderDetail.idProduct,
                       items: productService.products.map<DropdownMenuItem<String>>((ProductsModel value) {
                         return DropdownMenuItem<String>(
                           value: value.idProduct,
                           child: Text(value.nameProduct),
                         );
                       }).toList(),
-                      onChanged: (value) {
-                        cupboardProviderDetail.idProduct = value.toString();
-                        //print('valor del select $value');
-                      },
+                      onChanged: (value)=> cupboardPro.valueSelect(value.toString())
                     ),
 
                     const SizedBox(height: 20,),
@@ -112,7 +104,6 @@ class _EditCupboardForm extends StatelessWidget {
                     DateTimePicker(
                       type: DateTimePickerType.dateTime,
                       dateMask: 'd MMM, yyyy',
-                      //icon: Icon(Icons.event),
                       decoration: InputDecorations.authInputDecoration(
                         hintText: 'Date entry', 
                         labelText: 'Date entry',
@@ -123,7 +114,6 @@ class _EditCupboardForm extends StatelessWidget {
                       dateLabelText: 'Date entry',
                       onChanged: (val) {
                         cupboardProviderDetail.entryDate = val;
-                        //print(val);
                       },
                       validator: (value) {
                         if(value == null || value.isEmpty){
@@ -131,7 +121,6 @@ class _EditCupboardForm extends StatelessWidget {
                         }
                       },
                       onSaved: (val) {
-                        //print("valor print $val");
                       },
                     ),
 
@@ -140,7 +129,6 @@ class _EditCupboardForm extends StatelessWidget {
                     DateTimePicker(
                       type: DateTimePickerType.dateTime,
                       dateMask: 'd MMM, yyyy',
-                      //icon: Icon(Icons.event),
                       initialValue: cupboardProviderDetail.exitDate,
                       firstDate: DateTime(1900),
                       lastDate: DateTime(2100),
@@ -151,7 +139,6 @@ class _EditCupboardForm extends StatelessWidget {
                       ),
                       onChanged: (val) {
                         cupboardProviderDetail.exitDate = val;
-                        //(val);
                       },
                       validator: (value) {
                         if(value == null || value.isEmpty){
@@ -159,7 +146,6 @@ class _EditCupboardForm extends StatelessWidget {
                         }
                       },
                       onSaved: (val) {
-                        //print("valor print $val");
                       },
                     ),
 
@@ -168,7 +154,6 @@ class _EditCupboardForm extends StatelessWidget {
                     DateTimePicker(
                       type: DateTimePickerType.dateTime,
                       dateMask: 'd MMM, yyyy',
-                      //icon: Icon(Icons.event),
                       initialValue: cupboardProviderDetail.expirationDate,
                       firstDate: DateTime(1900),
                       lastDate: DateTime(2100),
@@ -179,16 +164,13 @@ class _EditCupboardForm extends StatelessWidget {
                       ),
                       onChanged: (val) {
                         cupboardProviderDetail.expirationDate = val;
-                        //print(val);
                       },
                       validator: (value) {
                         if(value == null || value.isEmpty){
                           return 'This fiel es required';
                         }
                       },
-                      onSaved: (val) {
-                        //print("valor print $val");
-                      },
+                      
                     ),
 
                     const SizedBox(height: 20,),

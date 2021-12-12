@@ -28,7 +28,7 @@ class ProductsPage extends StatelessWidget {
           productService.selectProduct = ProductsModel(
              
             nameProduct: "", 
-            idMark: "", 
+            idMark: productService.products.first.idMark, 
             barCode: "", 
           );
           Navigator.pushNamed(context, 'formProduct');

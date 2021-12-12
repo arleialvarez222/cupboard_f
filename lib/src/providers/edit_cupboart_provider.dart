@@ -11,6 +11,11 @@ class EditCupboardProvider extends ChangeNotifier{
     this.cupModel
   );
 
+  valueSelect(String value){
+    cupModel.idProduct = value;
+    notifyListeners();
+  }
+
 
 
   bool isValidForm(){

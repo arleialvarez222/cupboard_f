@@ -37,7 +37,6 @@ class MarkService extends ChangeNotifier{
 
     for (var value in categoriMap) {
       final response = Mark.fromMap(value);
-      //resCategori.idcategory = key;
       marks.add(response);
     }
 
