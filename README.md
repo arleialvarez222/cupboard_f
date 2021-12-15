@@ -1,4 +1,4 @@
-# cupboard_flutter
+Family Cupboard
 
 A new Flutter project.
 
