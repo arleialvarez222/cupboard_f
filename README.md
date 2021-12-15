@@ -19,18 +19,25 @@ This project has a branch: **main**. this contains the application code.
     1. Copy the repository url.
     2. Type git clone <repository url> in the git console. 
 
-![](/wi/img2.png) ![](/wi/img3.png)
+![](/wi/img2.png) 
+
+![](/wi/img3.png)
 ## Installation
 To install and run this proyect just type and execute
 ```bash
 flutter pub get
 
+```
+
 ![](/wi/img1.png)
 
-```
+
 ```bash
 f5
 ```
+
+## Database
+https://apiproductmanagmentteamint.azurewebsites.net/swagger/index.html
 
 ## Preview
 When the application is executed you should appreciate a view like this in the emulator or mobile phone.
