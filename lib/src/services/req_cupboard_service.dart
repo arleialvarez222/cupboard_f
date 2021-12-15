@@ -7,17 +7,15 @@ import 'package:http/http.dart' as http;
 
 class ReqCupboadService extends ChangeNotifier{
 
-  //final List<CupBoardReq> cupboardDetail = [];
   late CupBoardReq selectCupboardDetail;
-  //final List<CupBoardDetail> cupboardDet = [];
   late CupBoardDetail selectCupboardDet;
-
-
+  
   final List<CupboardModel> cupboardList = [];
   late CupboardModel selectCupboard;
   final List<CupboardAvailable> cupboardLista = [];
   late CupboardAvailable selectCupboardd;
   final storage = const FlutterSecureStorage();
+  final _baseUrl = 'https://apiproductmanagmentteamint.azurewebsites.net';
   bool isSaving = false;
   bool isloading = true;
   final fech = DateTime.now();
@@ -30,7 +28,7 @@ class ReqCupboadService extends ChangeNotifier{
   Future<List<CupboardAvailable>> getCupboard()async{
     notifyListeners();
 
-    final url = Uri.parse('https://10.0.2.2:5001/api/CupboardDetails/valid-products');
+    final url = Uri.parse('$_baseUrl/api/CupboardDetails/valid-products');
     final token = await storage.read(key: 'token');
       
     Map<String, String> requestHeaders = {
@@ -58,7 +56,7 @@ class ReqCupboadService extends ChangeNotifier{
   Future<List<CupboardModel>> getAllCupboard()async{
     notifyListeners();
 
-    final url = Uri.parse('https://10.0.2.2:5001/api/CupboardDetails');
+    final url = Uri.parse('$_baseUrl/api/CupboardDetails');
     final token = await storage.read(key: 'token');
       
     Map<String, String> requestHeaders = {
@@ -99,7 +97,7 @@ class ReqCupboadService extends ChangeNotifier{
   }
 
   Future<String?> saveCupboard(CupBoardReq cupboardReq, CupBoardDetail cupBoardDetail)async{
-    final url = Uri.parse('https://10.0.2.2:5001/api/CupBoard/Create-cupboard-Detail');
+    final url = Uri.parse('$_baseUrl/api/CupBoard/Create-cupboard-Detail');
     final token = await storage.read(key: 'token');
 
     final Map<String, dynamic> cupboardData = {
@@ -126,7 +124,7 @@ class ReqCupboadService extends ChangeNotifier{
   }
 
   Future<String?> updateCupboard(CupboardModel cupBoardDetail)async{
-    final url = Uri.parse('https://10.0.2.2:5001/api/CupboardDetails/${cupBoardDetail.idCupboardDetail}');
+    final url = Uri.parse('$_baseUrl/api/CupboardDetails/${cupBoardDetail.idCupboardDetail}');
     final token = await storage.read(key: 'token');
 
     Map<String, String> requesHeaders = {
@@ -146,7 +144,7 @@ class ReqCupboadService extends ChangeNotifier{
   }
 
   Future<String> deleteCupboard(String idCupboard) async {
-    final url = Uri.parse('https://10.0.2.2:5001/api/CupBoard/$idCupboard');
+    final url = Uri.parse('$_baseUrl/api/CupBoard/$idCupboard');
     final token = await storage.read(key: 'token');
 
     Map<String, String> requestHeaders = {

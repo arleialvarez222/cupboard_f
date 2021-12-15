@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 class AuthService extends ChangeNotifier {
 
   final storage = const  FlutterSecureStorage();
-
+  final _baseUrl = 'https://apiproductmanagmentteamint.azurewebsites.net';
 
   Future<String?> createUser(String nombreCompleto, String userName, String email, String password) async {
 
@@ -24,11 +24,9 @@ class AuthService extends ChangeNotifier {
       'Accept': 'application/json'
     };
 
-    final url = Uri.parse('https://10.0.2.2:5001/api/Acount/Register');
+    final url = Uri.parse('$_baseUrl/api/Acount/Register');
 
     await http.post(url, headers: requestHeaders, body: jsonEncode(authData));
-    //final Map<String, dynamic> decodeResp = json.decode(resp.body);
-    //print(resp.body);
 
     notifyListeners();
   } 
@@ -46,23 +44,17 @@ class AuthService extends ChangeNotifier {
       'Accept': 'application/json'
     };
 
-    final url = Uri.parse('https://10.0.2.2:5001/api/Acount/login');
+    final url = Uri.parse('$_baseUrl/api/Acount/login');
 
     http.Response resp = await http.post(url, headers: requestHeaders, body: jsonEncode(authData));
     final Map<dynamic, dynamic> decodeResp = json.decode(resp.body);
-    //print('respuesta login: ${decodeResp}');
-    //print(resp.body);
 
     if(decodeResp.containsKey('token')){
       await storage.write(key: 'token', value: decodeResp['token']);
       return null;
     }else{
-      
-      //print('respuesta loginService error: $decodeResp');
       return decodeResp['ERROR'];
-  
     } 
-
   } 
 
   Future logout()async {

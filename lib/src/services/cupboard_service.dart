@@ -9,6 +9,7 @@ class CupboardService extends ChangeNotifier{
   final List<CupboardModel> cupboardList = [];
   late CupboardModel selectCupboard;
   final storage = const FlutterSecureStorage();
+  final _baseUrl = 'https://apiproductmanagmentteamint.azurewebsites.net';
   bool isloading = true;
 
   CupboardService(){
@@ -18,7 +19,7 @@ class CupboardService extends ChangeNotifier{
   Future<List<CupboardModel>> getCupboard()async{
     notifyListeners();
 
-    final url = Uri.parse('https://10.0.2.2:5001/api/CupboardDetails');
+    final url = Uri.parse('$_baseUrl/api/CupboardDetails');
     final token = await storage.read(key: 'token');
       
     Map<String, String> requestHeaders = {

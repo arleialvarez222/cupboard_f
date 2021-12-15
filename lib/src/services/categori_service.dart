@@ -10,6 +10,7 @@ class CategoriService extends ChangeNotifier{
   late Categories selCategorie;
 
   final storage = const FlutterSecureStorage();
+  final _baseUrl = 'https://apiproductmanagmentteamint.azurewebsites.net';
 
   bool isloading = true;
   bool isSaving = false;
@@ -23,7 +24,7 @@ class CategoriService extends ChangeNotifier{
     isloading = true;
     notifyListeners();
 
-    final url = Uri.parse('https://10.0.2.2:5001/api/Categories');
+    final url = Uri.parse('$_baseUrl/api/Categories');
     final token = await storage.read(key: 'token');
       
     Map<String, String> requestHeaders = {
@@ -37,7 +38,6 @@ class CategoriService extends ChangeNotifier{
 
     for (var value in categoriMap) {
       final resCategori = Categories.fromMap(value);
-      //resCategori.idcategory = key;
       categories.add(resCategori);
     }
 
@@ -64,7 +64,7 @@ class CategoriService extends ChangeNotifier{
 
   Future<String?> saveCategory(Categories category) async {
 
-    final url = Uri.parse('https://10.0.2.2:5001/api/Categories');
+    final url = Uri.parse('$_baseUrl/api/Categories');
     final token = await storage.read(key: 'token');
 
     Map<String, String> requestHeaders = {
@@ -86,7 +86,7 @@ class CategoriService extends ChangeNotifier{
   Future<String?> updateCategory(Categories category) async {
     isSaving = true;
 
-    final url = Uri.parse('https://10.0.2.2:5001/api/Categories/${category.idcategory}');
+    final url = Uri.parse('$_baseUrl/api/Categories/${category.idcategory}');
     final token = await storage.read(key: 'token');
 
     Map<String, String> requestHeaders = {
@@ -108,7 +108,7 @@ class CategoriService extends ChangeNotifier{
   }
 
   Future<String> deleteCategory(String idcategory) async {
-    final url = Uri.parse('https://10.0.2.2:5001/api/Categories/$idcategory');
+    final url = Uri.parse('$_baseUrl/api/Categories/$idcategory');
     final token = await storage.read(key: 'token');
 
     Map<String, String> requestHeaders = {

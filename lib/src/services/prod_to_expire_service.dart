@@ -9,6 +9,7 @@ class ProductToExpireService extends ChangeNotifier{
   final List<ProdExpireModel> productToExpire = [];
   final storage = const FlutterSecureStorage();
   bool isloading = true;
+  final _baseUrl = 'https://apiproductmanagmentteamint.azurewebsites.net';
 
   ProductToExpireService(){
     getProductToExpire();
@@ -17,7 +18,7 @@ class ProductToExpireService extends ChangeNotifier{
   Future<List<ProdExpireModel>> getProductToExpire()async{
     notifyListeners();
 
-    final url = Uri.parse('https://10.0.2.2:5001/api/CupboardDetails/productsNextToExpire');
+    final url = Uri.parse('$_baseUrl/api/CupboardDetails/productsNextToExpire');
     final token = await storage.read(key: 'token');
       
     Map<String, String> requestHeaders = {

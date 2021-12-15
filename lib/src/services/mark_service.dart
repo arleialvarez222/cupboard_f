@@ -10,6 +10,7 @@ class MarkService extends ChangeNotifier{
   late Mark selectMark;
 
   final storage = const FlutterSecureStorage();
+  final _baseUrl = 'https://apiproductmanagmentteamint.azurewebsites.net';
 
   bool isloading = true;
   bool isSaving = false;
@@ -23,7 +24,8 @@ class MarkService extends ChangeNotifier{
     isloading = true;
     notifyListeners();
 
-    final url = Uri.parse('https://10.0.2.2:5001/api/Trademarks');
+    //final url = Uri.parse('https://10.0.2.2:5001/api/Trademarks');
+    final url = Uri.parse('$_baseUrl/api/Trademarks');
     final token = await storage.read(key: 'token');
       
     Map<String, String> requestHeaders = {
@@ -63,7 +65,7 @@ class MarkService extends ChangeNotifier{
 
   Future<String?> saveMark(Mark mark) async {
 
-    final url = Uri.parse('https://10.0.2.2:5001/api/Trademarks');
+    final url = Uri.parse('$_baseUrl/api/Trademarks');
     final token = await storage.read(key: 'token');
 
     Map<String, String> requestHeaders = {
@@ -84,7 +86,7 @@ class MarkService extends ChangeNotifier{
 
   Future<String?> updateMark(Mark mark) async {
 
-    final url = Uri.parse('https://10.0.2.2:5001/api/Trademarks/${mark.idTrademark}');
+    final url = Uri.parse('$_baseUrl/api/Trademarks/${mark.idTrademark}');
     final token = await storage.read(key: 'token');
     
     Map<String, String> requestHeaders = {
@@ -104,7 +106,7 @@ class MarkService extends ChangeNotifier{
   }
 
   Future<String> deleteMark(String idTrademark) async {
-    final url = Uri.parse('https://10.0.2.2:5001/api/Trademarks/$idTrademark');
+    final url = Uri.parse('$_baseUrl/api/Trademarks/$idTrademark');
     final token = await storage.read(key: 'token');
 
     Map<String, String> requestHeaders = {

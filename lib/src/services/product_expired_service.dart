@@ -9,6 +9,7 @@ class ExpiredProdutService extends ChangeNotifier{
   final List<ExpiredProdModel> expiredProduct = [];
   final storage = const FlutterSecureStorage();
   bool isloading = true;
+  final _baseUrl = 'https://apiproductmanagmentteamint.azurewebsites.net';
 
   ExpiredProdutService(){
     getExpiredProduct();
@@ -17,7 +18,7 @@ class ExpiredProdutService extends ChangeNotifier{
   Future<List<ExpiredProdModel>> getExpiredProduct()async{
     notifyListeners();
 
-    final url = Uri.parse('https://10.0.2.2:5001/api/CupboardDetails/expired-products');
+    final url = Uri.parse('$_baseUrl/api/CupboardDetails/expired-products');
     final token = await storage.read(key: 'token');
       
     Map<String, String> requestHeaders = {
