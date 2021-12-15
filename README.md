@@ -12,10 +12,12 @@ This project has a branch: **main**. this contains the application code.
 To install and run this proyect just type and execute
 ```bash
 flutter pub get
+```
+```bash
 f5
 ```
 
-## Getting Started
+## Preview
 When the application is executed you should appreciate a view like this in the emulator or mobile phone.
 
 ![](/previous.png)
