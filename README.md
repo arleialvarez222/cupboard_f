@@ -6,11 +6,11 @@ The purpose of this project is to manage the family cupboard, the products with 
 This project has a branch: **main**. this contains the application code.
 
 ## project structure
-State handler: provider.
-API connection: through services and models.
-Views: pages.
-Alternative widgets: widgets.
-Field decoration: global input. 
+▲ State handler: provider.
+▲ API connection: through services and models.
+▲ Views: pages.
+▲ Alternative widgets: widgets.
+▲ Field decoration: global input. 
 ## How to clone
     1. Copy the repository url.
     2. Type git clone <repository url> in the git console. 
