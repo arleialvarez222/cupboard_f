@@ -146,7 +146,7 @@ class _LoginForm extends StatelessWidget {
             validator: (value){
               return (value != null && value.length >= 6)
                 ? null
-                : 'Ingrese almenos 6 caracteres';
+                : 'Ingrese almenos 6 caracteres, \nal menos una minúscula, una mayúscula, \nun número y un carácter especial';
             },
           ),
 
