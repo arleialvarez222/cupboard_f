@@ -1,6 +1,7 @@
-Family Cupboard
+FAMILY CUPBOARD
 
-A new Flutter project.
+
+The purpose of this project is to manage the family cupboard, the products with their brands can be managed, and a register with the available foods, whitch are about to expire and have expired.
 
 ## Getting Started
 
